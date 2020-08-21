@@ -3,7 +3,7 @@ import requests
 import uuid
 import time
 from flask_babel import _
-from app import app
+# from app import app
 
 def translate(text, source_language, dest_language):
     time.sleep(2)

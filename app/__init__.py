@@ -6,13 +6,14 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 from flask_babel import Babel
+from flask_babel import lazy_gettext as _l
 
 from config import Config
 
 import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 import os
-
+from elasticsearch import Elasticsearch
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -45,6 +46,8 @@ def create_app(config_class=Config):
 
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
+
+    app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) if app.config['ELASTICSEARCH_URL'] else None
 
     if not app.debug and not app.testing:
         if app.config['MAIL_SERVER']:
