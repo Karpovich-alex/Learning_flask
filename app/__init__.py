@@ -8,7 +8,7 @@ from flask_bootstrap import Bootstrap
 from flask_babel import Babel
 from flask_babel import lazy_gettext as _l
 
-from config import Config
+from config import Config, basedir
 
 import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
